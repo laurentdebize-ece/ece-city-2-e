@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.23)
-project(projetING2_SimCityGroupe2E C)
+project(ece-city-2-e)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(projetING2_SimCityGroupe2E
+add_executable(ece-city-2-e
         main.c
         fonctionPrincipale.c fonctionPrincipale.h
         fctsReutilisables.c fctsReutilisables.h
@@ -18,11 +18,11 @@ add_executable(projetING2_SimCityGroupe2E
 
 
 IF(WIN32)
-    target_link_libraries(projetING2_SimCityGroupe2E -lmingw32 -lallegro-5.0.10-monolith-md-debug)
+    target_link_libraries(ece-city-2-e -lmingw32 -lallegro-5.0.10-monolith-md-debug)
 ELSE()
     INCLUDE_DIRECTORIES(/usr/local/Cellar/allegro/5.2.7.0/include)
     LINK_DIRECTORIES(/usr/local/Cellar/allegro/5.2.7.0/lib)
     file(GLOB LIBRARIES "/usr/local/Cellar/allegro/5.2.7.0/lib/*.dylib")
     message("LIBRARIES = ${LIBRARIES}")
-    TARGET_LINK_LIBRARIES(projetING2_SimCityGroupe2E ${LIBRARIES})
+    TARGET_LINK_LIBRARIES(ece-city-2-e ${LIBRARIES})
 ENDIF(WIN32)
