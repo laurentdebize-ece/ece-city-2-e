@@ -5,6 +5,7 @@
 #include "clcPartie1.h"
 #include "../menuPrincipal/menuPrincipal1.h"
 
+///fonctions qui gèrent la pause
 int mettrePause(ALLEGRO_TIMER *timer1s) {
     printf("fct de Pause\n");
     al_stop_timer(timer1s);
@@ -17,8 +18,9 @@ int finPause(ALLEGRO_TIMER *timer1s) {
     return 0;
 }
 
+
 int clicsPartie(ALLEGRO_BITMAP *interf, int mouseX, int mouseY, ALLEGRO_TIMER *timer1s, int minutes, int niveau,
-                int *etatBouton) {
+                int *etatBouton) {///fonction qui check quand et quels boutons sont selectionner lors de la partie
 
     Rect rPLATEAU;
 
@@ -161,7 +163,7 @@ int clicsPartie(ALLEGRO_BITMAP *interf, int mouseX, int mouseY, ALLEGRO_TIMER *t
 
 void initilisationTaillesBoutonsPartie(Rect *rPLATEAU, Rect *rpause, Rect *rsortie, Rect *rFinPause,
                                        Rect *rPoserMaison, Rect *rPoserRoute, Rect *rPoserElec, Rect *rPoserEau,
-                                       Rect *rstatue, Rect *recole, Rect *rtransport, Rect *rparc) {
+                                       Rect *rstatue, Rect *recole, Rect *rtransport, Rect *rparc) {///fonction qui donne l'emplacement de tous les boutons de l'interface de jeu
     rPLATEAU->x = X_DEPART_TRACE;
     rPLATEAU->y = Y_DEPART_TRACE;
     rPLATEAU->larg = X_FIN_TRACE-X_DEPART_TRACE;
