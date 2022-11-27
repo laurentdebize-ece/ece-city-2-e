@@ -7,7 +7,6 @@
 #include "affichage1.h"
 #include "Partie/poserObj1.h"
 
-
 void evolutionMaisonsCapitaliste(Plateau **plateau) {
 
     for (int i = 0; i < (*plateau)->nbMaisons; i++) {
