@@ -5,7 +5,7 @@
 #include "poserObj1.h"
 #include "maisons1.h"
 
-void poserObjet(int sourisX, int sourisY, Plateau **plateau, int info) {
+void poserObjet(int sourisX, int sourisY, Plateau **plateau, int info) {///fonction qui permet de poser un objet sur la carte
     bool occupe = -1;
 
     Case caseDepo = caseDepoObjets(sourisX, sourisY, plateau);
@@ -156,7 +156,7 @@ void poserObjet(int sourisX, int sourisY, Plateau **plateau, int info) {
 }
 
 
-Case caseDepoObjets(int sourisX, int sourisY, Plateau **plateau) {
+Case caseDepoObjets(int sourisX, int sourisY, Plateau **plateau) {///fonction détermine sur quelle case on souhaite poser un objet
     Case caseDepo;
 
     caseDepo.colonne = (int) (sourisX - X_DEPART_TRACE) / TAILLE_CASE;

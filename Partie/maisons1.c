@@ -5,22 +5,7 @@
 #include "maisons1.h"
 #include "../../ece-city-2-e//ftcsReutilisables1.h"
 
-Batiment creerMaison(Plateau* plateau, Batiment *tabMaison[], int *nbMaison, int *nbBat, int xMaison, int yMaison, int ligneMaison, int colonneMaison) {
-
-    (*nbMaison) ++;
-    (*nbBat) ++;
-
-    Batiment nvlMaison = nvllMaison(plateau,xMaison, yMaison, ligneMaison, colonneMaison);
-    return nvlMaison;
-}
-Batiment creerRoute(Plateau* plateau, Batiment *tabMaison[], int *nbBat, int x, int y, int ligne, int colonne) {
-
-    (*nbBat) ++;
-
-    Batiment nvlRoute = nvllroute(plateau,x, y, ligne, colonne);
-    return nvlRoute;
-}
-void rendreOccupe(Plateau **plateau, Case caseDepot, int info) {
+void rendreOccupe(Plateau **plateau, Case caseDepot, int info) {///fonction qui rend les cases occupées
     int x = caseDepot.x;
     int y = caseDepot.y;
     int ligne = caseDepot.ligne;
@@ -127,6 +112,23 @@ void rendreOccupe(Plateau **plateau, Case caseDepot, int info) {
             break;
         }
     }
+}
+
+///fonctions qui initialisent les batiments que l'on pose
+Batiment creerMaison(Plateau* plateau, Batiment *tabMaison[], int *nbMaison, int *nbBat, int xMaison, int yMaison, int ligneMaison, int colonneMaison) {
+
+    (*nbMaison) ++;
+    (*nbBat) ++;
+
+    Batiment nvlMaison = nvllMaison(plateau,xMaison, yMaison, ligneMaison, colonneMaison);
+    return nvlMaison;
+}
+Batiment creerRoute(Plateau* plateau, Batiment *tabMaison[], int *nbBat, int x, int y, int ligne, int colonne) {
+
+    (*nbBat) ++;
+
+    Batiment nvlRoute = nvllroute(plateau,x, y, ligne, colonne);
+    return nvlRoute;
 }
 
 Batiment nvllMaison(Plateau *plateau, int x, int y, int ligne, int colonne) {

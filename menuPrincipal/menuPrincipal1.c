@@ -4,7 +4,8 @@
 
 #include "menuPrincipal1.h"
 
-void choixPartie(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau) {
+void choixPartie(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue,
+                 Plateau *plateau) {///fonction qui permet de choisir ce que l'on fait dans le menu
 
     bool close = false;
     bool in = false;
@@ -29,6 +30,7 @@ void choixPartie(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *
             }
             case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN: {
                 al_get_mouse_state(&mouse);
+                ///choix du mode de jeu
                 clicsMenuPrincipal(&choix, event.mouse.x, event.mouse.y);
                 if (choix != 0) {
                     switch (choix) {
@@ -66,12 +68,12 @@ void initilisationTaillesBoutonsMenuPrincipal(Rect *rCOMMUNISTE, Rect *rCAPITALI
     rCAPITALISTE->haut = 330;
 }
 
-void clicsMenuChoixPartie(int *choix, int mouseX, int mouseY) {
+void clicsMenuChoixPartie(int *choix, int mouseX, int mouseY) {   ///choix pour faire une nouvelle ou une ancienne partie
+
     Rect rNouvellePartie;
     Rect rAnciennePartie;
     initilisationBoutonEcran2(&rNouvellePartie, &rAnciennePartie);
     bool in = false;
-    //  refaire ce meme schema pour chaque nouveau bouton (en mettant var+1 a chaques fois)
     selectionRectangle(rNouvellePartie, mouseX, mouseY, &in);
     if (in == true) {
         *choix = 1;
@@ -85,7 +87,8 @@ void clicsMenuChoixPartie(int *choix, int mouseX, int mouseY) {
     }
 }
 
-void clicsMenuPrincipal(int *choix, int mouseX, int mouseY) {
+void clicsMenuPrincipal(int *choix, int mouseX, int mouseY) {///fonction qui recupere le mode sur lequel on clique
+
     Rect rCOMMUNISTE;
     Rect rCAPITALISTE;
     initilisationTaillesBoutonsMenuPrincipal(&rCOMMUNISTE, &rCAPITALISTE);

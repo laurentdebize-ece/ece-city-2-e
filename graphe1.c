@@ -48,7 +48,7 @@ int ordreGraphe(Plateau * p){
 }
 
 
-// creer le graphe
+/// creer le graphe
 
 
 Graphe *CreerGraphe(int ordre) {
@@ -117,12 +117,12 @@ Graphe *lire_graphe(char *nomFichier, Plateau * plateau) {
     }
     fscanf(ifs, "%d", &ordre);
 
-    graphe = CreerGraphe(ordre); // creer le graphe d'ordre sommets
+    graphe = CreerGraphe(ordre); /// creer le graphe d'ordre sommets
     int taille=plateau->tailleGraphe;
 
     graphe->ordre = ordre;
 
-    // creer les aretes du graphe
+    /// creer les aretes du graphe
     for (int i = 0; i < taille; ++i) {
         fscanf(ifs, "%d%d", &s1, &s2);
         graphe->pSommet = CreerArete(graphe->pSommet, s1, s2);
