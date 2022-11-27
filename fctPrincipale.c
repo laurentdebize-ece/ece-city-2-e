@@ -29,12 +29,11 @@ Plateau initialiserPlateau(){ //nous permet d'initialiser toutes les données du
 }
 
 void fonctionPrincipale() {
+
+    ///Déclarations
     bool end = false;
     Plateau plateau = initialiserPlateau();
-
-
     ALLEGRO_BITMAP *choixPrt = NULL;
-
     ALLEGRO_DISPLAY *fenetre = NULL;
     ALLEGRO_EVENT_QUEUE *queue = NULL;
     ALLEGRO_MOUSE_STATE mouse;
@@ -43,6 +42,7 @@ void fonctionPrincipale() {
     ALLEGRO_SAMPLE_INSTANCE *songinstance;
     int choix =0;       //CHOIX 1 : MODE COMMUNISTE    // CHOIX 2 : MODE CAPITALISTE
 
+    ///Initialisations
     srand(time(NULL));
     al_init_font_addon();
     assert(al_init());
@@ -81,6 +81,7 @@ void fonctionPrincipale() {
     al_draw_bitmap(choixPrt, 0, 0, 0);
     al_flip_display();
 
+    ///Boucle jeu
     while (!end) {
         al_wait_for_event(queue, &event);
         switch (event.type) {
@@ -119,6 +120,8 @@ void fonctionPrincipale() {
 }
 
 void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau, int mode) {
+
+    ///Déclarations
     bool close = false;
     ALLEGRO_BITMAP *interf = NULL;
     ALLEGRO_BITMAP *pause = NULL;
@@ -141,6 +144,7 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
     ALLEGRO_FONT *police20 = NULL;
     ALLEGRO_FONT *police30 = NULL;
 
+    ///Initialisations
     int etatPause = 0;
     int niveau = 0;
     int minutes = 0;
@@ -159,7 +163,7 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
     assert(al_init_image_addon());
     assert(al_init_ttf_addon());
 
-    timer = al_create_timer(1.0 / 60.0);
+    timer = al_create_timer(1.0 / 40.0);
     timer1s = al_create_timer(1);
     if (timer == NULL) {
         al_destroy_display(fenetre);
@@ -170,12 +174,6 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
         al_destroy_timer(timer);
         exit(EXIT_FAILURE);
     }
-
-    al_register_event_source(queue, al_get_timer_event_source(timer));
-    al_register_event_source(queue, al_get_timer_event_source(timer1s));
-    al_register_event_source(queue, al_get_display_event_source(fenetre));  ///fermer la fenetre
-    al_register_event_source(queue, al_get_keyboard_event_source());        ///Capter les donnés claviers
-    al_register_event_source(queue, al_get_mouse_event_source());           ///Capter les donnés souris
 
     interf = al_load_bitmap("../Images/interfaceSimcity2.png");
     pause = al_load_bitmap("../Images/boutonPause.png");
@@ -195,8 +193,15 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
     police20 = al_load_ttf_font("../Lato/Lato-BoldItalic.ttf", 20, 0);
     al_clear_to_color(COULEUR_FOND);
 
+    ///Récupération des sources d'évennements
+    al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_timer_event_source(timer1s));
+    al_register_event_source(queue, al_get_display_event_source(fenetre));  ///fermer la fenetre
+    al_register_event_source(queue, al_get_keyboard_event_source());        ///Capter les donnés claviers
+    al_register_event_source(queue, al_get_mouse_event_source());           ///Capter les donnés souris
 
 
+    ///Boucle jeu
     al_start_timer(timer);
     al_start_timer(timer1s);
     while (!close) {
@@ -238,8 +243,9 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
                 break;
             }
             case ALLEGRO_EVENT_TIMER :{
+                ///incrémentation des compteurs d'évolution des maisons
                 for (int i = 0; i < plateau->nbMaisons; ++i) {
-                    if (plateau->tabBatiment[i].timerEvo < 902){
+                    if (plateau->tabBatiment[i].timerEvo < 602){
                         plateau->tabBatiment[i].timerEvo++;
                     }
                 }
