@@ -250,6 +250,11 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
                     if (plateau->tabBatiment[i].timerEvo < 602){
                         plateau->tabBatiment[i].timerEvo++;
                     }
+                    ///testrégression
+                    if (plateau->tabBatiment[i].evolution >=2){
+                        plateau->tabBatiment[i].alimenteeEau = 0;
+                        plateau->tabBatiment[i].alimenteeElec = 0;
+                    }
                 }
                 if (mode == CAPITALISTE){
                     evolutionMaisonsCapitaliste(&plateau);
