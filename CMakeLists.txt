@@ -5,16 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(ece-city-2-e
         main.c
-        fonctionPrincipale.c fonctionPrincipale.h
-        fctsReutilisables.c fctsReutilisables.h
-        sauvegarde.c sauvegarde.h
-        affichage.h affichage.c
         Partie
-        Partie/clciPartie.h Partie/clciPartie.c
-        Partie/poserObj.h Partie/poserObj.c
-        timer.c timer.c timer.h
-        Partie/maisons.c Partie/maisons.h
-        menuPrincipal/menuPrincip.c menuPrincipal/menuPrincip.h graphe.c graphe.h)
+        affichage1.c affichage1.h ftcsReutilisables1.c ftcsReutilisables1.h fctPrincipale.c fctPrincipale.h graphe1.c graphe1.h sauvegarde1.c sauvegarde1.h timer1.c timer1.h Partie/clcPartie1.c Partie/clcPartie1.h Partie/maisons1.c Partie/maisons1.h Partie/poserObj1.c Partie/poserObj1.h menuPrincipal/menuPrincipal1.c menuPrincipal/menuPrincipal1.h)
 
 
 IF(WIN32)
