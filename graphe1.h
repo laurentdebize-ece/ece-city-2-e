@@ -48,6 +48,9 @@ Plateau numerotationRoute(Plateau p);
 Graphe *CreerGraphe(int ordre);
 void creerFichierGraphe(Plateau * plateau, char*nomFichier);
 
+Graphe *lire_graphe(char *nomFichier, Plateau * plateau);
+
+
 typedef int typage;
 
 struct _cellule {
@@ -63,6 +66,8 @@ struct _file {
 };
 
 typedef struct _file* File;
+
+
 
 //Fonction qui renvoie si une file est vide ou non
 #define fileEstVide(F) ((F)->longueur == 0)
