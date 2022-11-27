@@ -8,7 +8,7 @@
 #include "ftcsReutilisables1.h"
 #include "Partie/clcPartie1.h"
 #include "menuPrincipal/menuPrincipal1.h"
-
+#include "graphe1.h"
 Plateau initialiserPlateau(){ //nous permet d'initialiser toutes les données du plateau
     Plateau plateau;
     plateau.banque.flouz = 500000;
@@ -219,10 +219,13 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
                 clicY = mouse.y;
                 sauvegarder(plateau);
                 clicsPartie(interf, mouse.x, mouse.y, timer1s, minutes, niveau, &etatPause);
+                Graphe * graphe;
+                graphe= lire_graphe("../Fichiers/graphe.txt",plateau);
                 if ((etatPause >= 3) && (X_DEPART_TRACE < clicX && X_FIN_TRACE > clicX &&
                                          Y_DEPART_TRACE < clicY && Y_FIN_TRACE > clicY)) {
                     {///On veut placer sur le plateau
                         poserObjet(clicX, clicY, &plateau, info);
+
                     }
                 }
                 break;

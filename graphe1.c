@@ -75,25 +75,25 @@ void creerFichierGraphe(Plateau *plateau, char*nomFichier) {
     for (int i = 0; i < NB_CASES_LARGEUR; ++i) {
         for (int j = 0; j < NB_CASES_HAUTEUR; ++j) {
 
-            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i + 1][j].batiment.evolution == 5 && plateau->tabCases[i+1][j].batiment.recherhce==0) {
+            if (plateau->tabCases[i][j].batiment.evolution == 8 && plateau->tabCases[i + 1][j].batiment.evolution == 8 && plateau->tabCases[i+1][j].batiment.recherhce==0) {
                 fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i+1][j].batiment.numRoute);
                 fprintf(fichier, "\n");
                 taille+=1;
             }
 
-            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i - 1][j].batiment.evolution == 5 && plateau->tabCases[i-1][j].batiment.recherhce==0) {
+            if (plateau->tabCases[i][j].batiment.evolution == 8 && plateau->tabCases[i - 1][j].batiment.evolution == 8 && plateau->tabCases[i-1][j].batiment.recherhce==0) {
                 fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i-1][j].batiment.numRoute);
                 fprintf(fichier, "\n");
                 taille+=1;
             }
 
-            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i][j + 1].batiment.evolution == 5  && plateau->tabCases[i][j+1].batiment.recherhce==0) {
+            if (plateau->tabCases[i][j].batiment.evolution == 8 && plateau->tabCases[i][j + 1].batiment.evolution == 8  && plateau->tabCases[i][j+1].batiment.recherhce==0) {
                 fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i][j+1].batiment.numRoute);
                 fprintf(fichier, "\n");
                 taille+=1;
             }
 
-            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i][j - 1].batiment.evolution == 5  && plateau->tabCases[i][j-1].batiment.recherhce==0) {
+            if (plateau->tabCases[i][j].batiment.evolution == 8 && plateau->tabCases[i][j - 1].batiment.evolution == 8  && plateau->tabCases[i][j-1].batiment.recherhce==0) {
                 fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i][j-1].batiment.numRoute);
                 fprintf(fichier, "\n");
                 taille+=1;
