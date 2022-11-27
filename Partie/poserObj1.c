@@ -161,9 +161,7 @@ Case caseDepoObjets(int sourisX, int sourisY, Plateau **plateau) {///fonction d√
 
     caseDepo.colonne = (int) (sourisX - X_DEPART_TRACE) / TAILLE_CASE;
     caseDepo.ligne = (int) (sourisY - Y_DEPART_TRACE) / TAILLE_CASE;
-    //printf("CASE DEPOT OBJET : \ncolone:%d\nligne:%d\n", caseDepo.colonne, caseDepo.ligne);
 
     convertirLCenXY(caseDepo.ligne, caseDepo.colonne, &caseDepo.x, &caseDepo.y);
-    //printf("CASE DEPOT OBJET : \nx:%d\ny:%d\n", caseDepo.x, caseDepo.y);
     return caseDepo;
 }

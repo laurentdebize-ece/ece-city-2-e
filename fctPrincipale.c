@@ -5,7 +5,6 @@
 #include "fctPrincipale.h"
 #include "affichage1.h"
 #include "sauvegarde1.h"
-#include "ftcsReutilisables1.h"
 #include "Partie/clcPartie1.h"
 #include "menuPrincipal/menuPrincipal1.h"
 #include "graphe1.h"
@@ -23,7 +22,7 @@ Plateau initialiserPlateau(){ //nous permet d'initialiser toutes les données du
             plateau.tabCases[i][j].y = Y_DEPART_TRACE + 21 * i;
             plateau.tabCases[i][j].batiment.evolution = 0;
             plateau.tabCases[i][j].batiment.numRoute=-1;
-            plateau.tabCases[i][j].batiment.recherhce=0;
+            //plateau.tabCases[i][j].batiment.recherhce=0;
             plateau.tabCases[i][j].etat = 0;
         }
     }
@@ -219,8 +218,8 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
                 clicY = mouse.y;
                 sauvegarder(plateau);
                 clicsPartie(interf, mouse.x, mouse.y, timer1s, minutes, niveau, &etatPause);
-                Graphe * graphe;
-                graphe= lire_graphe("../Fichiers/graphe.txt",plateau);
+                /*Graphe * graphe;
+                graphe= lire_graphe("../Fichiers/graphe.txt",plateau);*/
                 if ((etatPause >= 3) && (X_DEPART_TRACE < clicX && X_FIN_TRACE > clicX &&
                                          Y_DEPART_TRACE < clicY && Y_FIN_TRACE > clicY)) {
                     {///On veut placer sur le plateau

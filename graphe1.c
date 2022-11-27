@@ -2,7 +2,7 @@
 // Created by Amadou Kassim on 25/11/2022.
 //
 
-#include "graphe1.h"
+/*#include "graphe1.h"
 
 pSommet *CreerArete(pSommet *sommet, int s1, int s2) {
     if (sommet[s1]->arc == NULL) {
@@ -209,38 +209,4 @@ void parcoursBFS(Graphe* graphe, int s0){
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+*/

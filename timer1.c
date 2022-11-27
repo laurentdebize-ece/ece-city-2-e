@@ -223,7 +223,6 @@ int dessinerTout(int mode, Plateau *plateau, ALLEGRO_BITMAP *interf, ALLEGRO_DIS
                 case 11 : {
                     al_draw_bitmap(parcPNG, plateau->tabBatiment[i].x, plateau->tabBatiment[i].y, 0);
                     break;
-
                 }
                 case 3 : {
                     al_draw_bitmap(maison4, plateau->tabBatiment[i].x, plateau->tabBatiment[i].y, 0);
@@ -247,11 +246,11 @@ int dessinerTout(int mode, Plateau *plateau, ALLEGRO_BITMAP *interf, ALLEGRO_DIS
 
 
     } else if (niveau == 1) {
+        dessinerMap();
         dessinerNiv1(plateau, eauPNG);
-        dessinerMap();
     } else if (niveau == 2) {
-        dessinerNiv2(plateau, elecPNG);
         dessinerMap();
+        dessinerNiv2(plateau, elecPNG);
     }
 
     al_draw_bitmap(interf, 0, 0, 0);
@@ -404,7 +403,6 @@ int fImpots(Plateau *plateau, int impots) {
     if (impots == 600) {
         impots = 0;
         plateau->banque.flouz += TAXE_HABITANT * plateau->nbHabitants;
-        printf("%d", plateau->banque.flouz);
     }
     return impots;
 }
