@@ -13,7 +13,7 @@ void evolutionMaisonsCapitaliste(Plateau **plateau) {
     for (int i = 0; i < (*plateau)->nbMaisons; i++) {
         ///evolution des batiments
         if ((*plateau)->tabBatiment[i].evolution < 4 && (*plateau)->tabBatiment[i].alimenteeEau == 1 &&
-            (*plateau)->tabBatiment[i].alimenteeElec == 1 && (*plateau)->tabBatiment[i].timerEvo >= 900) {
+            (*plateau)->tabBatiment[i].alimenteeElec == 1 && (*plateau)->tabBatiment[i].timerEvo >= 600) {
             (*plateau)->tabBatiment[i].evolution++;
             (*plateau)->tabBatiment[i].timerEvo = 0;
             switch ((*plateau)->tabBatiment[i].evolution) {
@@ -120,7 +120,7 @@ void evolutionMaisonsCommuniste(Plateau **plateau) {
         ///regression des batiments
         if ((*plateau)->tabBatiment[i].evolution > 1 && (*plateau)->tabBatiment[i].evolution <= 4 &&
             (*plateau)->tabBatiment[i].alimenteeEau == 0 &&
-            (*plateau)->tabBatiment[i].alimenteeElec == 0 && (*plateau)->tabBatiment[i].timerEvo >= 900) {
+            (*plateau)->tabBatiment[i].alimenteeElec == 0 && (*plateau)->tabBatiment[i].timerEvo >= 600) {
             (*plateau)->tabBatiment[i].evolution--;
             (*plateau)->tabBatiment[i].timerEvo = 0;
             switch ((*plateau)->tabBatiment[i].evolution) {
@@ -391,7 +391,7 @@ int dessinerTout(int mode, Plateau *plateau, ALLEGRO_BITMAP *interf, ALLEGRO_DIS
 
 int fImpots(Plateau *plateau, int impots) {
     impots++;
-    if (impots == 900) {
+    if (impots == 600) {
         impots = 0;
         plateau->banque.flouz += TAXE_HABITANT * plateau->nbHabitants;
         printf("%d", plateau->banque.flouz);
