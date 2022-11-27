@@ -1,5 +1,5 @@
 //
-// Created by crouz on 27/11/2022.
+// Created by Amadou Kassim on 25/11/2022.
 //
 
 #include "graphe1.h"
@@ -34,18 +34,19 @@ pSommet *CreerArete(pSommet *sommet, int s1, int s2) {
 ///fonction qui renvoie l'odre du graphe que l'on va par la suite cree
 /// ordre du graphe correspond au nombre de route présentent sur le plateau
 ///permet aussi numéroter les routes
-int ordreGraphe(Plateau p){
+int ordreGraphe(Plateau * p){
     int ordre=0;
     for (int i = 0; i < NB_CASES_LARGEUR; ++i) {
         for (int j = 0; j < NB_CASES_HAUTEUR; ++j) {
-            if (p.tabCases[i][j].batiment.evolution==5){
-                p.tabCases[i][j].batiment.numRoute=ordre;
+            if (p->tabCases[i][j].batiment.evolution==5){
+                p->tabCases[i][j].batiment.numRoute=ordre;
                 ordre+=1;
             }
         }
     }
     return ordre;
 }
+
 
 // creer le graphe
 
@@ -65,47 +66,146 @@ Graphe *CreerGraphe(int ordre) {
 }
 
 
-void creerFichierGraphe(Plateau plateau) {
-    FILE * fichier= fopen("../Fichiers/graphe.txt", "w");
+void creerFichierGraphe(Plateau *plateau, char*nomFichier) {
+    FILE *fichier = fopen(nomFichier, "w");
     int ordre = ordreGraphe(plateau);
-    Adjacence tableau[ordre + 1];
-    for (int i = 0; i < ordre + 1; ++i) {
-        tableau[i].sommet1 = -1;
-        tableau[i].sommet2 = -1;
-    }
-    Adjacence *adjacence;
-    adjacence = malloc(1 * sizeof(Adjacence));
-    int itterateur = 0;
+    fprintf(fichier, "%d",ordre);
+    fprintf(fichier, "\n");
+    int taille=0;
     for (int i = 0; i < NB_CASES_LARGEUR; ++i) {
         for (int j = 0; j < NB_CASES_HAUTEUR; ++j) {
-            if (plateau.tabCases[i][j].batiment.evolution == 5 && plateau.tabCases[i - 1][j].batiment.evolution == 5) {
-                tableau[itterateur].sommet1 = plateau.tabCases[i][j].batiment.numRoute;
-                tableau[itterateur].sommet2 = plateau.tabCases[i - 1][j].batiment.numRoute;
-                itterateur += 1;
+
+            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i + 1][j].batiment.evolution == 5 && plateau->tabCases[i+1][j].batiment.recherhce==0) {
+                fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i+1][j].batiment.numRoute);
+                fprintf(fichier, "\n");
+                taille+=1;
             }
-            else if (plateau.tabCases[i][j].batiment.evolution == 5 &&
-                     plateau.tabCases[i + 1][j].batiment.evolution == 5) {
-                tableau[itterateur].sommet1 = plateau.tabCases[i][j].batiment.numRoute;
-                tableau[itterateur].sommet2 = plateau.tabCases[i + 1][j].batiment.numRoute;
-                itterateur += 1;
+
+            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i - 1][j].batiment.evolution == 5 && plateau->tabCases[i-1][j].batiment.recherhce==0) {
+                fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i-1][j].batiment.numRoute);
+                fprintf(fichier, "\n");
+                taille+=1;
             }
-            else if (plateau.tabCases[i][j].batiment.evolution == 5 &&
-                     plateau.tabCases[i][j + 1].batiment.evolution == 5) {
-                tableau[itterateur].sommet1 = plateau.tabCases[i][j].batiment.numRoute;
-                tableau[itterateur].sommet2 = plateau.tabCases[i][j + 1].batiment.numRoute;
-                itterateur += 1;
-            } else if (plateau.tabCases[i][j].batiment.evolution == 5 &&
-                       plateau.tabCases[i][j - 1].batiment.evolution == 5) {
-                tableau[itterateur].sommet1 = plateau.tabCases[i][j].batiment.numRoute;
-                tableau[itterateur].sommet2 = plateau.tabCases[i][j - 1].batiment.numRoute;
-                itterateur += 1;
+
+            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i][j + 1].batiment.evolution == 5  && plateau->tabCases[i][j+1].batiment.recherhce==0) {
+                fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i][j+1].batiment.numRoute);
+                fprintf(fichier, "\n");
+                taille+=1;
             }
+
+            if (plateau->tabCases[i][j].batiment.evolution == 5 && plateau->tabCases[i][j - 1].batiment.evolution == 5  && plateau->tabCases[i][j-1].batiment.recherhce==0) {
+                fprintf(fichier, "%d %d",plateau->tabCases[i][j].batiment.numRoute, plateau->tabCases[i][j-1].batiment.numRoute);
+                fprintf(fichier, "\n");
+                taille+=1;
+            }
+
+
+            plateau->tabCases[i][j].batiment.recherhce=-1;
         }
     }
-    for (int i = 0; i < ordre + 1; ++i) {
-        if (adjacence[i].sommet1 == -1 && adjacence[i].sommet2 == -1) {
-        }else {fprintf(fichier,"%d %d",adjacence[i].sommet1,adjacence[i].sommet2);
-            fprintf(fichier, "\n");
+    plateau->tailleGraphe=taille;
+}
+
+Graphe *lire_graphe(char *nomFichier, Plateau * plateau) {
+    creerFichierGraphe(plateau,nomFichier);
+    Graphe *graphe;
+    FILE *ifs = fopen(nomFichier, "r");
+    int ordre, s1, s2;
+    if (!ifs) {
+        printf("Erreur de lecture fichier\n");
+        exit(-1);
+    }
+    fscanf(ifs, "%d", &ordre);
+
+    graphe = CreerGraphe(ordre); // creer le graphe d'ordre sommets
+    int taille=plateau->tailleGraphe;
+
+    graphe->ordre = ordre;
+
+    // creer les aretes du graphe
+    for (int i = 0; i < taille; ++i) {
+        fscanf(ifs, "%d%d", &s1, &s2);
+        graphe->pSommet = CreerArete(graphe->pSommet, s1, s2);
+    }
+
+    return graphe;
+}
+
+
+File fileVide() {
+    File F;
+    F = (File)malloc(sizeof(struct _file));
+    if (F == NULL) printf("erreur allocation fileVide");
+    F->longueur = 0;
+    F->tete = F->queue = NULL;
+    return(F);
+}
+
+int longueur(File F) {
+    if (F == NULL)printf("file existe pas - longueur");
+    return(F->longueur);
+}
+
+void enfiler(File F, typage element) {
+    Cellule cellule;
+    if (F == NULL) printf ("file existe pas - enfiler");
+
+    cellule = (Cellule)malloc(sizeof(struct _cellule));
+    if (cellule == NULL) printf("erreur allocation memoire - enfiler");
+    cellule->element = element;
+    cellule->suivant = NULL;
+    if (longueur(F) == 0){
+        F->tete = F->queue = cellule;
+    }
+    else {
+        F->queue->suivant = cellule;
+        F->queue = cellule;
+    }
+    ++(F->longueur);
+}
+
+typage defiler(File F) {
+    Cellule cellule;
+    typage element;
+    if (F == NULL || longueur(F) == 0) printf("File existe pas - defilement");
+    cellule = F->tete;
+    element = cellule->element;
+    if (longueur(F) == 1){
+        F->tete = F->queue = NULL;
+    }
+    else{
+        F->tete = F->tete->suivant;
+    }
+    free(cellule);
+    --(F->longueur);
+    return(element);
+}
+
+
+void parcoursBFS(Graphe* graphe, int s0){
+    int taille = graphe->taille;
+    int preds[taille];
+    for(int i=0;i<graphe->ordre;i++){
+        graphe->pSommet[i]->couleur=0;
+    }
+    for (int i = 0;i <graphe->ordre ;++i) {
+        preds[i] = -1;
+    }
+    File file = fileVide();
+    enfiler(file,s0);
+    graphe->pSommet[s0]->couleur=1;
+
+    while(file->tete!=NULL){
+        int num=defiler(file);
+        struct Arc* pArc=graphe->pSommet[num]->arc;
+        while(pArc!=NULL){
+            int num2=pArc->sommet;
+            if(graphe->pSommet[num2]->couleur==0){
+                enfiler(file,num2);
+                graphe->pSommet[num2]->couleur=1;
+                preds[num2]=num;
+            }
+            pArc=pArc->arc_suivant;
         }
     }
 }
@@ -144,28 +244,3 @@ void creerFichierGraphe(Plateau plateau) {
 
 
 
-/* La construction du reseau peut se faire a partir d'un fichier dont le nom est passe en parametre
-Le fichier contient : ordre, taille,orientation (0 ou 1)et liste des arcs */
-void ajouterRouteGraphe(char *nomFichier, int ordre,int xRoute, int yRoute) {
-    FILE *ifs = fopen(nomFichier, "w");
-    fprintf(ifs, "%d %d", xRoute,yRoute);
-    fputs("\n",ifs);
-}
-
-void reparerRoute(Plateau plateau, Graphe*graphe){
-    int xCentral,yCentral;
-    for (int i = 0; i < NB_CASES_LARGEUR; i++) {
-        for (int j = 0; j < NB_CASES_HAUTEUR; j++) {
-            if(plateau.tabCases[i][j].batiment.evolution==5){
-                xCentral=plateau.tabCases[i][j].batiment.x;
-                yCentral=plateau.tabCases[i][j].batiment.y;
-                for (int k = 0; k < 6; k++) {
-                    for (int l = 0; l < 4; l++) {
-                        //ajouter route au graphe
-                    }
-                }
-            }
-
-        }
-    }
-}

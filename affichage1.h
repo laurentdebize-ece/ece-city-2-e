@@ -53,6 +53,7 @@ typedef struct Batiment {
     int numRoute;
     // 0 = ruine / 1 = cabane / 2 = maison / 3 = immeuble / 4 = gratte-ciel / 5= chateau eau / 6= central electrique /8=route
     int x, y; // coin superieur gauche du bitmap
+    int recherhce; // permet de vérifier si toutes les cases autour on été explorer
     int ligne, colonne; // ligne -> y , colonne -> x
     int alimenteeEau;
     int alimenteeElec;
@@ -78,6 +79,7 @@ typedef struct Banque{
 typedef struct Plateau { // structure principale, on met tout dedans pour pas se passer 1000 trucs en parametre à chaque fct
     int ligne;
     int colonne;
+    int tailleGraphe;
     Batiment tabBatiment[100];
     //Graphe* graphe;
     int timer;

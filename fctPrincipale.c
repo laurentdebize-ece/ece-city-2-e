@@ -22,6 +22,8 @@ Plateau initialiserPlateau(){ //nous permet d'initialiser toutes les données du
             plateau.tabCases[i][j].x = X_DEPART_TRACE + 21 * i;
             plateau.tabCases[i][j].y = Y_DEPART_TRACE + 21 * i;
             plateau.tabCases[i][j].batiment.evolution = 0;
+            plateau.tabCases[i][j].batiment.numRoute=-1;
+            plateau.tabCases[i][j].batiment.recherhce=0;
             plateau.tabCases[i][j].etat = 0;
         }
     }
