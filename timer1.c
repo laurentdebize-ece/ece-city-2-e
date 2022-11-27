@@ -9,44 +9,61 @@
 
 
 void evolutionMaisonsCapitaliste(Plateau **plateau) {
+
     for (int i = 0; i < (*plateau)->nbMaisons; i++) {
         ///evolution des batiments
         if ((*plateau)->tabBatiment[i].evolution < 4 && (*plateau)->tabBatiment[i].alimenteeEau == 1 &&
-            (*plateau)->tabBatiment[i].alimenteeElec == 1 && (*plateau)->tabBatiment[i].timerEvo == 900) {
+            (*plateau)->tabBatiment[i].alimenteeElec == 1 && (*plateau)->tabBatiment[i].timerEvo >= 900) {
             (*plateau)->tabBatiment[i].evolution++;
             (*plateau)->tabBatiment[i].timerEvo = 0;
+            switch ((*plateau)->tabBatiment[i].evolution) {
+                case 1 : {
+                    (*plateau)->nbHabitants += NBHAB_CABANE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CABANE;
+                    break;
+                }
+                case 2 : {
+                    (*plateau)->nbHabitants += NBHAB_MAISON - NBHAB_CABANE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_MAISON;
+                    break;
+                }
+                case 3 : {
+                    (*plateau)->nbHabitants += NBHAB_IMMEUBLE - NBHAB_MAISON;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_IMMEUBLE;
+                    break;
+                }
+                case 4 : {
+                    (*plateau)->nbHabitants += NBHAB_CHATEAU - NBHAB_IMMEUBLE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CHATEAU;
+                    break;
+                }
+            }
         }
         ///regression des batiments
         if ((*plateau)->tabBatiment[i].evolution > 1 && (*plateau)->tabBatiment[i].evolution <= 4 &&
             (*plateau)->tabBatiment[i].alimenteeEau == 0 &&
-            (*plateau)->tabBatiment[i].alimenteeElec == 0 && (*plateau)->tabBatiment[i].timerEvo == 900) {
+            (*plateau)->tabBatiment[i].alimenteeElec == 0 && (*plateau)->tabBatiment[i].timerEvo >= 900) {
             (*plateau)->tabBatiment[i].evolution--;
             (*plateau)->tabBatiment[i].timerEvo = 0;
-        }
-        switch ((*plateau)->tabBatiment[i].evolution) {
-            case 1 : {
-                (*plateau)->nbHabitants += NBHAB_CABANE;
-                (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CABANE;
-                break;
-            }
-            case 2 : {
-                (*plateau)->nbHabitants += NBHAB_MAISON - NBHAB_CABANE;
-                (*plateau)->tabBatiment[i].nbHabitants = NBHAB_MAISON;
-                break;
-            }
-            case 3 : {
-                (*plateau)->nbHabitants += NBHAB_IMMEUBLE - NBHAB_MAISON;
-                (*plateau)->tabBatiment[i].nbHabitants = NBHAB_IMMEUBLE;
-                break;
-            }
-            case 4 : {
-                (*plateau)->nbHabitants += NBHAB_CHATEAU - NBHAB_IMMEUBLE;
-                (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CHATEAU;
-                break;
+            switch ((*plateau)->tabBatiment[i].evolution) {
+                case 1 : {
+                    (*plateau)->nbHabitants -= NBHAB_MAISON - NBHAB_CABANE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CABANE;
+                    break;
+                }
+                case 2 : {
+                    (*plateau)->nbHabitants -= NBHAB_IMMEUBLE - NBHAB_MAISON;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_MAISON;
+                    break;
+                }
+                case 3 : {
+                    (*plateau)->nbHabitants -= NBHAB_CHATEAU - NBHAB_IMMEUBLE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_IMMEUBLE;
+                    break;
+                }
             }
         }
     }
-    (*plateau)->banque.flouz += ((*plateau)->nbHabitants * TAXE_HABITANT);
 }
 
 void evolutionMaisonsCommuniste(Plateau **plateau) {
@@ -74,16 +91,55 @@ void evolutionMaisonsCommuniste(Plateau **plateau) {
         if ((*plateau)->tabBatiment[i].evolution < 4 &&
             nbHabitantPlateauNivSuiv <= (*plateau)->banque.capaEau &&
             nbHabitantPlateauNivSuiv <= (*plateau)->banque.capaElec &&
-            (*plateau)->tabBatiment[i].timerEvo == 900) {
+            (*plateau)->tabBatiment[i].timerEvo >= 900) {
             (*plateau)->tabBatiment[i].evolution++;
             (*plateau)->tabBatiment[i].timerEvo = 0;
+            switch ((*plateau)->tabBatiment[i].evolution) {
+                case 1 : {
+                    (*plateau)->nbHabitants += NBHAB_CABANE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CABANE;
+                    break;
+                }
+                case 2 : {
+                    (*plateau)->nbHabitants += NBHAB_MAISON - NBHAB_CABANE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_MAISON;
+                    break;
+                }
+                case 3 : {
+                    (*plateau)->nbHabitants += NBHAB_IMMEUBLE - NBHAB_MAISON;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_IMMEUBLE;
+                    break;
+                }
+                case 4 : {
+                    (*plateau)->nbHabitants += NBHAB_CHATEAU - NBHAB_IMMEUBLE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CHATEAU;
+                    break;
+                }
+            }
         }
         ///regression des batiments
         if ((*plateau)->tabBatiment[i].evolution > 1 && (*plateau)->tabBatiment[i].evolution <= 4 &&
             (*plateau)->tabBatiment[i].alimenteeEau == 0 &&
-            (*plateau)->tabBatiment[i].alimenteeElec == 0 && (*plateau)->tabBatiment[i].timerEvo == 900) {
+            (*plateau)->tabBatiment[i].alimenteeElec == 0 && (*plateau)->tabBatiment[i].timerEvo >= 900) {
             (*plateau)->tabBatiment[i].evolution--;
             (*plateau)->tabBatiment[i].timerEvo = 0;
+            switch ((*plateau)->tabBatiment[i].evolution) {
+                case 1 : {
+                    (*plateau)->nbHabitants -= NBHAB_MAISON - NBHAB_CABANE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_CABANE;
+                    break;
+                }
+                case 2 : {
+                    (*plateau)->nbHabitants -= NBHAB_IMMEUBLE - NBHAB_MAISON;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_MAISON;
+                    break;
+                }
+                case 3 : {
+                    (*plateau)->nbHabitants -= NBHAB_CHATEAU - NBHAB_IMMEUBLE;
+                    (*plateau)->tabBatiment[i].nbHabitants = NBHAB_IMMEUBLE;
+                    break;
+                }
+            }
         }
         switch ((*plateau)->tabBatiment[i].evolution) {
             case 1 : {
@@ -337,7 +393,7 @@ int fImpots(Plateau *plateau, int impots) {
     impots++;
     if (impots == 900) {
         impots = 0;
-        plateau->banque.flouz += 10 * plateau->nbHabitants;
+        plateau->banque.flouz += TAXE_HABITANT * plateau->nbHabitants;
         printf("%d", plateau->banque.flouz);
     }
     return impots;

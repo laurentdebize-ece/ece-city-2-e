@@ -15,8 +15,8 @@ void poserObjet(int sourisX, int sourisY, Plateau **plateau, int info) {
         case ROUTE: {
             if (occupe != true && ((*plateau)->banque.flouz - PRIX_ROUTE) >= 0) {
                 (*plateau)->nbBat ++;
-                Batiment nvlMaison = nvllroute(*plateau,caseDepo.x, caseDepo.y, caseDepo.x, caseDepo.y);
-                (*plateau)->tabCases[caseDepo.colonne][caseDepo.ligne].batiment = nvlMaison;
+                Batiment nvlRoute = nvllroute(*plateau, caseDepo.x, caseDepo.y, caseDepo.x, caseDepo.y);
+                (*plateau)->tabCases[caseDepo.colonne][caseDepo.ligne].batiment = nvlRoute;
 
                 (*plateau)->tabBatiment[((*plateau)->nbBat)-1] = (*plateau)->tabCases[caseDepo.colonne][caseDepo.ligne].batiment;
                 (*plateau)->tabBatiment[((*plateau)->nbBat)-1].x = caseDepo.x;

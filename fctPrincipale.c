@@ -239,7 +239,15 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
             }
             case ALLEGRO_EVENT_TIMER :{
                 for (int i = 0; i < plateau->nbMaisons; ++i) {
-                    plateau->tabBatiment->timerEvo++;
+                    if (plateau->tabBatiment[i].timerEvo < 902){
+                        plateau->tabBatiment[i].timerEvo++;
+                    }
+                }
+                if (mode == CAPITALISTE){
+                    evolutionMaisonsCapitaliste(&plateau);
+                }
+                if (mode == COMMUNISTE){
+                    evolutionMaisonsCommuniste(&plateau);
                 }
                 impots = fImpots(plateau, impots);
                 minutes = dessinerTout(mode, plateau, interf, fenetre, timer1s, minutes, niveau, &etatPause, pause, road,

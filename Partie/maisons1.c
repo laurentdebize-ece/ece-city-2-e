@@ -128,6 +128,7 @@ void rendreOccupe(Plateau **plateau, Case caseDepot, int info) {
         }
     }
 }
+
 Batiment nvllMaison(Plateau *plateau, int x, int y, int ligne, int colonne) {
     plateau->banque.flouz -= PRIX_MAISON;
     Batiment nvlMaison;
@@ -137,8 +138,11 @@ Batiment nvllMaison(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvlMaison.colonne = colonne;
     nvlMaison.evolution = 0;
     nvlMaison.nbHabitants = 0;
-    nvlMaison.alimenteeEau = 0;
-    nvlMaison.alimenteeElec =0;
+    nvlMaison.alimenteeEau = 1;
+    nvlMaison.alimenteeElec =1;
+    nvlMaison.timerEvo = 0;
+
+    return nvlMaison;
 }
 
 Batiment nvllCentrale(Plateau *plateau, int x, int y, int ligne, int colonne) {
@@ -149,6 +153,8 @@ Batiment nvllCentrale(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvllCentrale.ligne = ligne;
     nvllCentrale.colonne = colonne;
     nvllCentrale.evolution = 6;
+
+    return nvllCentrale;
 }
 
 Batiment nvChateauEau(Plateau *plateau, int x, int y, int ligne, int colonne){
@@ -159,6 +165,8 @@ Batiment nvChateauEau(Plateau *plateau, int x, int y, int ligne, int colonne){
     nvChateauEau.ligne = ligne;
     nvChateauEau.colonne = colonne;
     nvChateauEau.evolution = 5;
+
+    return nvChateauEau;
 }
 
 Batiment nvllroute(Plateau *plateau, int x, int y, int ligne, int colonne) {
@@ -169,6 +177,8 @@ Batiment nvllroute(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvllRoute.ligne = ligne;
     nvllRoute.colonne = colonne;
     nvllRoute.evolution = 7;
+
+    return nvllRoute;
 }
 Batiment nvllStatue(Plateau *plateau, int x, int y, int ligne, int colonne) {
     plateau->banque.flouz -= 5000;
@@ -178,6 +188,8 @@ Batiment nvllStatue(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvllStatue.ligne = ligne;
     nvllStatue.colonne = colonne;
     nvllStatue.evolution = 8;
+
+    return nvllStatue;
 }
 Batiment nvllEcole(Plateau *plateau, int x, int y, int ligne, int colonne) {
     plateau->banque.flouz -= 7000;
@@ -187,6 +199,8 @@ Batiment nvllEcole(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvllEcole.ligne = ligne;
     nvllEcole.colonne = colonne;
     nvllEcole.evolution = 9;
+
+    return nvllEcole;
 }
 Batiment nvTransport(Plateau *plateau, int x, int y, int ligne, int colonne) {
     plateau->banque.flouz -= 2000;
@@ -196,6 +210,8 @@ Batiment nvTransport(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvTransport.ligne = ligne;
     nvTransport.colonne = colonne;
     nvTransport.evolution = 10;
+
+    return nvTransport;
 }
 Batiment nvParc(Plateau *plateau, int x, int y, int ligne, int colonne) {
     plateau->banque.flouz -= 1000;
@@ -205,4 +221,6 @@ Batiment nvParc(Plateau *plateau, int x, int y, int ligne, int colonne) {
     nvParc.ligne = ligne;
     nvParc.colonne = colonne;
     nvParc.evolution = 11;
+
+    return nvParc;
 }
