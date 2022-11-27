@@ -338,7 +338,7 @@ int fImpots(Plateau *plateau, int impots) {
     if (impots == 900) {
         impots = 0;
         plateau->banque.flouz += 10 * plateau->nbHabitants;
-        printf("%d", plateau->banque.flouz);
+        //printf("%d", plateau->banque.flouz);
     }
     return impots;
 }
