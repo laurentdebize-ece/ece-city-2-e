@@ -159,7 +159,7 @@ void jeu(ALLEGRO_DISPLAY *fenetre, ALLEGRO_EVENT_QUEUE *queue, Plateau *plateau,
     assert(al_init_image_addon());
     assert(al_init_ttf_addon());
 
-    timer = al_create_timer(1.0 / 40.0);
+    timer = al_create_timer(1.0 / 60.0);
     timer1s = al_create_timer(1);
     if (timer == NULL) {
         al_destroy_display(fenetre);
